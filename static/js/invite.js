@@ -19,7 +19,11 @@ function update_subscription_checkboxes() {
             // it's the only stream you have, or if you've made it private.
             var default_status = stream_data.get_default_status(value);
             var invite_status = stream_data.get_invite_only(value);
-            streams.push({name: value, invite_only: invite_status, default_stream: default_status});
+            streams.push({
+              name: value,
+              invite_only: invite_status,
+              default_stream: default_status,
+            });
             // Sort by default status.
             streams.sort(function (a, b) {
                 return b.default_stream - a.default_stream;
