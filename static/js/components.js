@@ -24,7 +24,8 @@ exports.toggle = (function () {
             opts.values.forEach(function (value, i) {
                 // create a tab with a tab-id so they don't have to be referenced
                 // by text value which can be inconsistent.
-                var tab = $("<div class='ind-tab' data-tab-key='" + value.key + "' data-tab-id='" + i + "' tabindex='0'>" + value.label + "</div>");
+                var tab = $("<div class='ind-tab' data-tab-key='" + value.key +
+                    "' data-tab-id='" + i + "' tabindex='0'>" + value.label + "</div>");
 
                 // add proper classes for styling in CSS.
                 if (i === 0) {
