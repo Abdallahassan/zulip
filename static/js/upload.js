@@ -52,7 +52,8 @@ exports.uploadError = function (error_code, server_response, file) {
             var context = {
                 file_name: file.name,
             };
-            msg = i18n.t('"__file_name__" was too large; the maximum file size is 25MiB.', context);
+            msg = i18n.t('"__file_name__" was too large; the maximum file size is 25MiB.',
+                        context);
             break;
         case 413: // HTTP status "Request Entity Too Large"
             msg = i18n.t("Sorry, the file was too large.");
