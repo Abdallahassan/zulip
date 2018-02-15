@@ -88,13 +88,15 @@ exports.on_load_success = function (invites_data) {
     });
 
     $("#do_revoke_invite_button").click(function () {
-        var modal_invite_id = $("#revoke_invite_modal #do_revoke_invite_button").attr("data-invite-id");
+        var modal_invite_id = $("#revoke_invite_modal #do_revoke_invite_button")
+        .attr("data-invite-id");
         var revoke_button = meta.current_revoke_invite_user_modal_row.find("button.revoke");
 
         if (modal_invite_id !== meta.invite_id) {
             blueslip.error("Invite revoking canceled due to non-matching fields.");
-            ui_report.message(i18n.t("Resending encountered an error. Please reload and try again."),
-               $("#home-error"), 'alert-error');
+            ui_report.message(i18n.t(
+                    "Resending encountered an error. Please reload and try again."),
+                    $("#home-error"), 'alert-error');
         }
         $("#revoke_invite_modal").modal("hide");
         revoke_button.prop("disabled", true).text(i18n.t("Working…"));
@@ -116,13 +118,15 @@ exports.on_load_success = function (invites_data) {
     });
 
     $("#do_resend_invite_button").click(function () {
-        var modal_invite_id = $("#resend_invite_modal #do_resend_invite_button").attr("data-invite-id");
+        var modal_invite_id = $("#resend_invite_modal #do_resend_invite_button")
+            .attr("data-invite-id");
         var resend_button = meta.current_resend_invite_user_modal_row.find("button.resend");
 
         if (modal_invite_id !== meta.invite_id) {
             blueslip.error("Invite resending canceled due to non-matching fields.");
-            ui_report.message(i18n.t("Resending encountered an error. Please reload and try again."),
-               $("#home-error"), 'alert-error');
+            ui_report.message(i18n.t(
+                    "Resending encountered an error. Please reload and try again."),
+                    $("#home-error"), 'alert-error');
         }
         $("#resend_invite_modal").modal("hide");
         resend_button.prop("disabled", true).text(i18n.t("Working…"));
