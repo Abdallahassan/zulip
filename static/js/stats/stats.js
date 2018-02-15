@@ -30,9 +30,10 @@ function floor_to_local_week(date) {
 }
 
 function format_date(date, include_hour) {
-    var months = [i18n.t('January'), i18n.t('February'), i18n.t('March'), i18n.t('April'), i18n.t('May'), i18n.t('June'),
-                  i18n.t('July'), i18n.t('August'), i18n.t('September'), i18n.t('October'), i18n.t('November'),
-                  i18n.t('December')];
+    var months = [i18n.t('January'), i18n.t('February'), i18n.t('March'),
+                  i18n.t('April'), i18n.t('May'), i18n.t('June'),
+                  i18n.t('July'), i18n.t('August'), i18n.t('September'),
+                  i18n.t('October'), i18n.t('November'), i18n.t('December')];
     var month_str = months[date.getMonth()];
     var year = date.getFullYear();
     var day = date.getDate();
@@ -53,7 +54,8 @@ function update_last_full_update(end_times) {
 
     last_full_update = Math.min(last_full_update, end_times[end_times.length - 1]);
     var update_time = new Date(last_full_update * 1000);
-    var locale_date = update_time.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    var locale_date = update_time.toLocaleDateString('en-US',
+        { year: 'numeric', month: 'long', day: 'numeric' });
     var locale_time = update_time.toLocaleTimeString().replace(":00 ", " ");
 
     $('#id_last_full_update').text(locale_time + " on " + locale_date);
@@ -176,7 +178,9 @@ function populate_messages_sent_over_time(data) {
         var current = {human: 0, bot: 0, me: 0};
         var i_init = 0;
         if (is_boundary(start_dates[0])) {
-            current = {human: data.realm.human[0], bot: data.realm.bot[0], me: data.user.human[0]};
+            current = {human: data.realm.human[0], bot: data.realm.bot[0],
+                me: data.user.human[0]};
+
             i_init = 1;
         }
         for (var i = i_init; i < start_dates.length; i += 1) {
@@ -252,7 +256,7 @@ function populate_messages_sent_over_time(data) {
         layout.xaxis.rangeselector = rangeselector;
         if (clicked_cumulative || initial_draw) {
             Plotly.newPlot('id_messages_sent_over_time',
-                           [traces.me, traces.human, traces.bot], layout, {displayModeBar: false});
+                [traces.me, traces.human, traces.bot], layout, {displayModeBar: false});
             add_hover_handler();
         } else {
             Plotly.deleteTraces('id_messages_sent_over_time', [0, 1, 2]);
@@ -402,7 +406,8 @@ function populate_messages_sent_by_client(data) {
             if (plot_data.values[i] > 0) {
                 annotations.values.push(plot_data.values[i]);
                 annotations.labels.push(plot_data.labels[i]);
-                annotations.text.push('   ' + plot_data.labels[i] + ' (' + plot_data.percentages[i] + ')');
+                annotations.text.push('   ' + plot_data.labels[i] +
+                    ' (' + plot_data.percentages[i] + ')');
             }
         }
         return {
@@ -537,28 +542,28 @@ function populate_messages_sent_by_message_type(data) {
     };
 
     function make_plot_data(time_series_data, num_steps) {
-        var plot_data = compute_summary_chart_data(time_series_data, num_steps, data.display_order);
+        var p_data = compute_summary_chart_data(time_series_data, num_steps, data.display_order);
         var labels = [];
-        for (var i=0; i<plot_data.labels.length; i+=1) {
-            labels.push(plot_data.labels[i] + ' (' + plot_data.percentages[i] + ')');
+        for (var i=0; i < p_data.labels.length; i+=1) {
+            labels.push(p_data.labels[i] + ' (' + p_data.percentages[i] + ')');
         }
         return {
             trace: {
-                values: plot_data.values,
+                values: p_data.values,
                 labels: labels,
                 type: 'pie',
                 direction: 'clockwise',
                 rotation: -90,
                 sort: false,
                 textinfo: "text",
-                text: plot_data.labels.map(function () { return ''; }),
+                text: p_data.labels.map(function () { return ''; }),
                 hoverinfo: "label+value",
                 pull: 0.05,
                 marker: {
                     colors: ['#68537c', '#be6d68', '#b3b348'],
                 },
             },
-            total_str: "<b>Total messages:</b> " + plot_data.total.toString().
+            total_str: "<b>Total messages:</b> " + p_data.total.toString().
                 replace(/\B(?=(\d{3})+(?!\d))/g, ","),
         };
     }
