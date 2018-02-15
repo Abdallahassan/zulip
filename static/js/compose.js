@@ -18,7 +18,8 @@ exports.announce_warn_threshold = 60;
 
 exports.uploads_domain = document.location.protocol + '//' + document.location.host;
 exports.uploads_path = '/user_uploads';
-exports.uploads_re = new RegExp("\\]\\(" + exports.uploads_domain + "(" + exports.uploads_path + "[^\\)]+)\\)", 'g');
+exports.uploads_re = new RegExp("\\]\\(" + exports.uploads_domain +
+    "(" + exports.uploads_path + "[^\\)]+)\\)", 'g');
 exports.clone_file_input = undefined;
 
 function make_uploads_relative(content) {
@@ -363,7 +364,8 @@ function patch_request_for_scheduling(request) {
 
         $("#compose-textarea").attr('disabled', false);
         if (command_line.slice(command.length, command.length + 1) !== ' ') {
-            compose_error(i18n.t('Invalid slash command. Check if you are missing a space after the command.'), $('#compose-textarea'));
+            compose_error(i18n.t('Invalid slash command. Check if you are missing a space after the command.'),
+                $('#compose-textarea'));
         } else if (deliver_at.trim() === '') {
             compose_error(i18n.t('Please specify time for your reminder.'), $('#compose-textarea'));
         } else {
@@ -398,7 +400,8 @@ exports.schedule_message = function schedule_message(request, success, error) {
     because we won't ever actually have success operate in different context than error. */
     if (success === undefined) {
         success = function (data) {
-            notifications.notify_above_composebox('Scheduled your Message to be delivered at: ' + data.deliver_at);
+            notifications.notify_above_composebox('Scheduled your Message to be delivered at: ' +
+                data.deliver_at);
             $("#compose-textarea").attr('disabled', false);
             clear_compose_box();
         };
@@ -634,11 +637,13 @@ function validate_private_message() {
     var context = {};
     if (invalid_recipients.length === 1) {
         context = {recipient: invalid_recipients.join()};
-        compose_error(i18n.t("The recipient __recipient__ is not valid", context), $("#private_message_recipient"));
+        compose_error(i18n.t("The recipient __recipient__ is not valid", context),
+            $("#private_message_recipient"));
         return false;
     } else if (invalid_recipients.length > 1) {
         context = {recipients: invalid_recipients.join()};
-        compose_error(i18n.t("The recipients __recipients__ are not valid", context), $("#private_message_recipient"));
+        compose_error(i18n.t("The recipients __recipients__ are not valid", context),
+            $("#private_message_recipient"));
         return false;
     }
     return true;
@@ -907,7 +912,8 @@ exports.initialize = function () {
         warning_area.show();
     });
 
-    $("#compose_private_stream_alert").on('click', '.compose_private_stream_alert_close', function (event) {
+    $("#compose_private_stream_alert").on('click','.compose_private_stream_alert_close',
+        function (event) {
         var stream_alert_row = $(event.target).parents('.compose_private_stream_alert');
         var stream_alert = $("#compose_private_stream_alert");
 
@@ -935,7 +941,8 @@ exports.initialize = function () {
         var preview_html;
         if (content !== undefined && markdown.is_status_message(content, rendered_content)) {
             // Handle previews of /me messages
-            preview_html = "<strong>" + page_params.full_name + "</strong> " + rendered_content.slice(4 + 3, -4);
+            preview_html = "<strong>" + page_params.full_name + "</strong> " +
+            rendered_content.slice(4 + 3, -4);
         } else {
             preview_html = rendered_content;
         }
