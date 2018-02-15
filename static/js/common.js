@@ -64,8 +64,7 @@ exports.password_warning = function (password, password_field) {
     var min_length = password_field.data('minLength');
 
     if (password.length < min_length) {
-        return i18n.t('Password should be at least __length__ characters long',
-            {length: min_length});
+        return i18n.t('Password should be at least __length__ characters long', {length: min_length});
     }
     return zxcvbn(password).feedback.warning || i18n.t("Password is too weak");
 };
