@@ -120,7 +120,8 @@ function populate_users(realm_people_data) {
     list_render($bots_table, bots, {
         name: "admin_bot_list",
         modifier: function (item) {
-            return templates.render("admin_user_list", { user: item, can_modify: page_params.is_admin });
+            return templates.render("admin_user_list", 
+                { user: item, can_modify: page_params.is_admin });
         },
         filter: {
             element: $bots_table.closest(".settings-section").find(".search"),
@@ -156,7 +157,8 @@ function populate_users(realm_people_data) {
                 activity_rendered = $("<span></span>").text(i18n.t("Unknown"));
             }
 
-            var $row = $(templates.render("admin_user_list", {user: item, can_modify: page_params.is_admin}));
+            var $row = $(templates.render("admin_user_list", 
+                {user: item, can_modify: page_params.is_admin}));
 
             $row.find(".last_active").append(activity_rendered);
 
@@ -178,7 +180,8 @@ function populate_users(realm_people_data) {
     list_render($deactivated_users_table, deactivated_users, {
         name: "deactivated_users_table_list",
         modifier: function (item) {
-            return templates.render("admin_user_list", { user: item, can_modify: page_params.is_admin });
+            return templates.render("admin_user_list", 
+                { user: item, can_modify: page_params.is_admin });
         },
         filter: {
             element: $deactivated_users_table.closest(".settings-section").find(".search"),
@@ -243,11 +246,13 @@ exports.on_load_success = function (realm_people_data) {
 
         if ($("#deactivation_user_modal .email").html() !== email) {
             blueslip.error("User deactivation canceled due to non-matching fields.");
-            ui_report.message(i18n.t("Deactivation encountered an error. Please reload and try again."),
+            ui_report.message(i18n.t(
+                "Deactivation encountered an error. Please reload and try again."),
                $("#home-error"), 'alert-error');
         }
         $("#deactivation_user_modal").modal("hide");
-        meta.current_deactivate_user_modal_row.find("button").eq(0).prop("disabled", true).text(i18n.t("Working…"));
+        meta.current_deactivate_user_modal_row.find("button").eq(0).prop("disabled", true)
+            .text(i18n.t("Working…"));
         channel.del({
             url: '/json/users/' + encodeURIComponent(email),
             error: function (xhr) {

@@ -23,7 +23,8 @@ exports.set_night_mode = function (bool) {
         },
         error: function (xhr) {
             if (overlays.settings_open()) {
-                ui_report.error(i18n.t("Error updating night mode setting."), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error updating night mode setting."), xhr, 
+                    $('#display-settings-status').expectOne());
             }
         },
     });
@@ -59,11 +60,14 @@ exports.set_up = function () {
             url: '/json/settings/display',
             data: data,
             success: function () {
-                ui_report.success(i18n.t("__lang__ is now the default language!  You will need to reload the window for your changes to take effect", context),
+                ui_report.success(i18n.t(
+                    "__lang__ is now the default language!  "+
+                    "You will need to reload the window for your changes to take effect", context),
                                   $('#display-settings-status').expectOne());
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error updating default language setting"), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error updating default language setting"),
+                    xhr, $('#display-settings-status').expectOne());
             },
         });
     });
@@ -93,7 +97,8 @@ exports.set_up = function () {
                                   $('#display-settings-status').expectOne());
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error updating high contrast setting"), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error updating high contrast setting"),
+                    xhr, $('#display-settings-status').expectOne());
             },
         });
     });
@@ -117,11 +122,13 @@ exports.set_up = function () {
             url: '/json/settings/display',
             data: data,
             success: function () {
-                ui_report.success(i18n.t("User list will appear on the __side__ hand side! You will need to reload the window for your changes to take effect.", context),
-                                  $('#display-settings-status').expectOne());
+                ui_report.success(i18n.t("User list will appear on the __side__ hand side!" +
+                    "You will need to reload the window for your changes to take effect.", 
+                    context),$('#display-settings-status').expectOne());
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error updating user list placement setting"), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error updating user list placement setting"),
+                    xhr, $('#display-settings-status').expectOne());
             },
         });
     });
@@ -141,11 +148,13 @@ exports.set_up = function () {
             url: '/json/settings/display',
             data: data,
             success: function () {
-                ui_report.success(i18n.t("Time will now be displayed in the __format__-hour format!", context),
+                ui_report.success(i18n.t(
+                    "Time will now be displayed in the __format__-hour format!", context),
                                   $('#display-settings-status').expectOne());
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error updating time format setting"), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error updating time format setting"), 
+                xhr, $('#display-settings-status').expectOne());
             },
         });
     });
@@ -159,10 +168,12 @@ exports.set_up = function () {
             url: '/json/settings/display',
             data: data,
             success: function () {
-                ui_report.success(i18n.t("Your time zone have been set to __timezone__", {timezone: timezone}), $('#display-settings-status').expectOne());
+                ui_report.success(i18n.t("Your time zone have been set to __timezone__",
+                    {timezone: timezone}), $('#display-settings-status').expectOne());
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error updating time zone"), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error updating time zone"), xhr,
+                    $('#display-settings-status').expectOne());
             },
         });
     });
@@ -180,7 +191,8 @@ exports.set_up = function () {
                 loading.make_indicator(spinner, {text: 'Changing emojiset.'});
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error changing emojiset."), xhr, $('#display-settings-status').expectOne());
+                ui_report.error(i18n.t("Error changing emojiset."), 
+                    xhr, $('#display-settings-status').expectOne());
             },
         });
     });
