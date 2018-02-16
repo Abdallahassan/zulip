@@ -640,7 +640,7 @@ exports.MessageList.prototype = {
         this.view.rerender_the_whole_thing();
     },
 
-    change_message_id: function MessageList_change_message_id(old_id, new_id) {
+    change_msg_id: function MessageList_change_msg_id(old_id, new_id) {
         // Update our local cache that uses the old id to the new id
         function message_sort_func(a, b) {return a.id - b.id;}
 

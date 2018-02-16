@@ -178,16 +178,16 @@ var with_overrides = global.with_overrides; // make lint happy
     assert.equal(list.nth_most_recent_id(4), -1);
 }());
 
-(function test_change_message_id() {
+(function test_change_msg_id() {
     var table;
     var filter = {};
 
     var list = new MessageList(table, filter);
     list.append([{id: 10.5, content: "good job"}, {id: 20.5, content: "ok!"}]);
-    list.change_message_id(10.5, 11);
+    list.change_msg_id(10.5, 11);
     assert.equal(list.get(11).content, "good job");
 
-    list.change_message_id(20.5, 10);
+    list.change_msg_id(20.5, 10);
     assert.equal(list.get(10).content, "ok!");
 }());
 
