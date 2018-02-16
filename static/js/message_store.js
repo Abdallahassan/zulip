@@ -177,10 +177,10 @@ exports.reify_message_id = function (opts) {
 
     _.each([message_list.all, home_msg_list, message_list.narrowed], function (msg_list) {
         if (msg_list !== undefined) {
-            msg_list.change_message_id(old_id, new_id);
+            msg_list.change_msg_id(old_id, new_id);
 
             if (msg_list.view !== undefined) {
-                msg_list.view.change_message_id(old_id, new_id);
+                msg_list.view.change_msg_id(old_id, new_id);
             }
         }
     });

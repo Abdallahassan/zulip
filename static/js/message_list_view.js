@@ -991,7 +991,7 @@ MessageListView.prototype = {
         return this.list.get(id);
     },
 
-    change_message_id: function MessageListView_change_message_id(old_id, new_id) {
+    change_msg_id: function MessageListView_change_msg_id(old_id, new_id) {
         if (this._rows[old_id] !== undefined) {
             var row = this._rows[old_id];
             delete this._rows[old_id];

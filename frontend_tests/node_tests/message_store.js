@@ -225,7 +225,7 @@ global.people.initialize_current_user(me.user_id);
     };
 
     global.with_stub(function (stub) {
-        home_msg_list.change_message_id = stub.f;
+        home_msg_list.change_msg_id = stub.f;
         message_store.reify_message_id(opts);
         var msg_id = stub.get_args('old', 'new');
         assert.equal(msg_id.old, 401);
@@ -234,7 +234,7 @@ global.people.initialize_current_user(me.user_id);
 
     home_msg_list.view = {};
     global.with_stub(function (stub) {
-        home_msg_list.view.change_message_id = stub.f;
+        home_msg_list.view.change_msg_id = stub.f;
         message_store.reify_message_id(opts);
         var msg_id = stub.get_args('old', 'new');
         assert.equal(msg_id.old, 401);
