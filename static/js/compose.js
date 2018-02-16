@@ -644,13 +644,13 @@ function validate_private_message() {
     var context = {};
     if (invalid_recipients.length === 1) {
         context = {recipient: invalid_recipients.join()};
-        compose_error(i18n.t("The recipient __recipient__ is not valid", context)
-        , $("#private_message_recipient"));
+        compose_error(i18n.t("The recipient __recipient__ is not valid", context),
+            $("#private_message_recipient"));
         return false;
     } else if (invalid_recipients.length > 1) {
         context = {recipients: invalid_recipients.join()};
-        compose_error(i18n.t("The recipients __recipients__ are not valid", context)
-        , $("#private_message_recipient"));
+        compose_error(i18n.t("The recipients __recipients__ are not valid", context),
+            $("#private_message_recipient"));
         return false;
     }
     return true;
@@ -920,8 +920,8 @@ exports.initialize = function () {
         warning_area.show();
     });
 
-    $("#compose_private_stream_alert").on('click'
-    , '.compose_private_stream_alert_close', function (event) {
+    $("#compose_private_stream_alert").on('click',
+        '.compose_private_stream_alert_close', function (event) {
         var stream_alert_row = $(event.target).parents('.compose_private_stream_alert');
         var stream_alert = $("#compose_private_stream_alert");
 
@@ -949,8 +949,8 @@ exports.initialize = function () {
         var preview_html;
         if (content !== undefined && markdown.is_status_message(content, rendered_content)) {
             // Handle previews of /me messages
-            preview_html = "<strong>" + page_params.full_name + "</strong> "
-             + rendered_content.slice(4 + 3, -4);
+            preview_html = "<strong>" + page_params.full_name + "</strong> " +
+                rendered_content.slice(4 + 3, -4);
         } else {
             preview_html = rendered_content;
         }
