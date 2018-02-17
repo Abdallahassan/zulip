@@ -53,7 +53,8 @@ exports.generic_embed_error = function (error) {
     var $alert = $("<div class='alert home-error-bar'></div>");
     var $exit = "<div class='exit'></div>";
 
-    $(".alert-box").append($alert.html($exit + "<div class='content'>" + error + "</div>").addClass("show"));
+    $(".alert-box").append(
+        $alert.html($exit + "<div class='content'>" + error + "</div>").addClass("show"));
 };
 
 exports.hide_error = function ($target) {

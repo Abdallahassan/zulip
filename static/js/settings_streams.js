@@ -46,7 +46,8 @@ exports.build_default_stream_table = function (streams_data) {
     list_render(table, streams_data, {
         name: "default_streams_list",
         modifier: function (item) {
-            var row = $(templates.render("admin_default_streams_list", { stream: item, can_modify: page_params.is_admin }));
+            var row = $(templates.render("admin_default_streams_list",
+                { stream: item, can_modify: page_params.is_admin }));
             self.row_dict.set(item.stream_id, row);
             return row;
         },
@@ -168,7 +169,8 @@ exports.set_up = function () {
     });
 
     $("#do_deactivate_stream_button").click(function () {
-        if ($("#deactivation_stream_modal .stream_name").text() !== $(".active_stream_row").find('.stream_name').text()) {
+        if ($("#deactivation_stream_modal .stream_name").text() !==
+                $(".active_stream_row").find('.stream_name').text()) {
             blueslip.error("Stream deactivation canceled due to non-matching fields.");
             ui_report.message(i18n.t("Deactivation encountered an error. Please reload and try again."),
                $("#home-error"), 'alert-error');
