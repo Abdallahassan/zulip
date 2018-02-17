@@ -341,7 +341,9 @@ exports.user_is_subscribed = function (stream_name, user_email) {
         // If we don't know about the stream, or we ourselves are not
         // subscribed, we can't keep track of the subscriber list in general,
         // so we return undefined (treated as falsy if not explicitly handled).
-        blueslip.warn("We got a user_is_subscribed call for a non-existent or unsubscribed stream.");
+        var warning = "We got a user_is_subscribed call for a ";
+        warning = warning.concat("non-existent or unsubscribed stream.");
+        blueslip.warn(warning);
         return undefined;
     }
     var user_id = people.get_user_id(user_email);
@@ -385,7 +387,8 @@ exports.create_sub_from_server_data = function (stream_name, attrs) {
 
     sub = _.defaults(raw_attrs, {
         name: stream_name,
-        render_subscribers: !page_params.realm_is_zephyr_mirror_realm || attrs.invite_only === true,
+        render_subscribers: !page_params.realm_is_zephyr_mirror_realm
+                            || attrs.invite_only === true,
         subscribed: true,
         newly_subscribed: false,
         in_home_view: true,

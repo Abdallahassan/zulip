@@ -389,7 +389,8 @@ exports.display_errors_on_screen = function (error, stack) {
     var $exit = "<div class='exit'></div>";
     var $error = "<div class='error'>" + error + "</div>";
     var $pre = "<pre>" + stack + "</pre>";
-    var $alert = $("<div class='alert browser-alert home-error-bar'></div>").html($error + $exit + $pre);
+    var $alert = $("<div class='alert browser-alert home-error-bar'></div>")
+                    .html($error + $exit + $pre);
 
     $(".app .alert-box").append($alert.addClass("show"));
 };
