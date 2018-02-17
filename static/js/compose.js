@@ -18,8 +18,8 @@ exports.announce_warn_threshold = 60;
 
 exports.uploads_domain = document.location.protocol + '//' + document.location.host;
 exports.uploads_path = '/user_uploads';
-exports.uploads_re = new RegExp(
-    "\\]\\(" + exports.uploads_domain + "(" + exports.uploads_path + "[^\\)]+)\\)", 'g');
+exports.uploads_re = new RegExp("\\]\\(" + exports.uploads_domain +
+    "(" + exports.uploads_path + "[^\\)]+)\\)", 'g');
 exports.clone_file_input = undefined;
 
 function make_uploads_relative(content) {
@@ -319,8 +319,7 @@ exports.send_message = function send_message(request) {
     }
 
     exports.transmit_message(request, success, error);
-    server_events.assert_get_events_running(
-        "Restarting get_events because it was not running during send");
+    server_events.assert_get_events_running("Restarting get_events because it was not running during send");
 
     if (locally_echoed) {
         clear_compose_box();
@@ -365,12 +364,10 @@ function patch_request_for_scheduling(request) {
 
         $("#compose-textarea").attr('disabled', false);
         if (command_line.slice(command.length, command.length + 1) !== ' ') {
-            compose_error(i18n.t(
-                'Invalid slash command. Check if you are missing a space after the command.')
-                , $('#compose-textarea'));
+            compose_error(i18n.t('Invalid slash command. Check if you are missing a space after the command.'),
+                $('#compose-textarea'));
         } else if (deliver_at.trim() === '') {
-            compose_error(
-                i18n.t('Please specify time for your reminder.'), $('#compose-textarea'));
+            compose_error(i18n.t('Please specify time for your reminder.'), $('#compose-textarea'));
         } else {
             compose_error(i18n.t('Your reminder note is empty!'), $('#compose-textarea'));
         }
@@ -403,8 +400,8 @@ exports.schedule_message = function schedule_message(request, success, error) {
     because we won't ever actually have success operate in different context than error. */
     if (success === undefined) {
         success = function (data) {
-            notifications.notify_above_composebox(
-                'Scheduled your Message to be delivered at: ' + data.deliver_at);
+            notifications.notify_above_composebox('Scheduled your Message to be delivered at: ' +
+                data.deliver_at);
             $("#compose-textarea").attr('disabled', false);
             clear_compose_box();
         };
@@ -575,17 +572,14 @@ exports.validate_stream_message_address_info = function (stream_name) {
     switch (check_unsubscribed_stream_for_send(stream_name,
                                                page_params.narrow_stream !== undefined)) {
     case "does-not-exist":
-        response = i18n.t(
-            "<p>The stream <b>__stream_name__</b> does not exist.</p><p>Manage your subscriptions "+
-            "<a href='#streams/all'>on your Streams page</a>.</p>", context);
+        response = i18n.t("<p>The stream <b>__stream_name__</b> does not exist.</p><p>Manage your subscriptions <a href='#streams/all'>on your Streams page</a>.</p>", context);
         compose_error(response, $('#stream'));
         return false;
     case "error":
         compose_error(i18n.t("Error checking subscription"), $("#stream"));
         return false;
     case "not-subscribed":
-        response = i18n.t("<p>You're not subscribed to the stream <b>__stream_name__</b>.</p><p>"+
-        "Manage your subscriptions <a href='#streams/all'>on your Streams page</a>.</p>", context);
+        response = i18n.t("<p>You're not subscribed to the stream <b>__stream_name__</b>.</p><p>Manage your subscriptions <a href='#streams/all'>on your Streams page</a>.</p>", context);
         compose_error(response, $('#stream'));
         return false;
     }
@@ -631,8 +625,7 @@ function validate_stream_message() {
 // for now)
 function validate_private_message() {
     if (compose_state.recipient() === "") {
-        compose_error(i18n.t("Please specify at least one recipient")
-        , $("#private_message_recipient"));
+        compose_error(i18n.t("Please specify at least one recipient"), $("#private_message_recipient"));
         return false;
     } else if (page_params.realm_is_zephyr_mirror_realm) {
         // For Zephyr mirroring realms, the frontend doesn't know which users exist
@@ -671,8 +664,7 @@ exports.validate = function () {
     }
 
     if ($("#zephyr-mirror-error").is(":visible")) {
-        compose_error(i18n.t(
-            "You need to be running Zephyr mirroring in order to send messages!"));
+        compose_error(i18n.t("You need to be running Zephyr mirroring in order to send messages!"));
         return false;
     }
 
@@ -920,8 +912,8 @@ exports.initialize = function () {
         warning_area.show();
     });
 
-    $("#compose_private_stream_alert").on('click',
-        '.compose_private_stream_alert_close', function (event) {
+    $("#compose_private_stream_alert").on('click','.compose_private_stream_alert_close',
+        function (event) {
         var stream_alert_row = $(event.target).parents('.compose_private_stream_alert');
         var stream_alert = $("#compose_private_stream_alert");
 
@@ -950,7 +942,7 @@ exports.initialize = function () {
         if (content !== undefined && markdown.is_status_message(content, rendered_content)) {
             // Handle previews of /me messages
             preview_html = "<strong>" + page_params.full_name + "</strong> " +
-                rendered_content.slice(4 + 3, -4);
+            rendered_content.slice(4 + 3, -4);
         } else {
             preview_html = rendered_content;
         }
@@ -1030,9 +1022,8 @@ exports.initialize = function () {
             // Required. Called when a user selects an item in the Chooser.
             success: function (files) {
                 var textbox = $("#compose-textarea");
-                var links = _.map(files, function (file) {
-                     return '[' + file.name + '](' + file.link +')'; 
-                    }).join(' ') + ' ';
+                var links = _.map(files, function (file) { return '[' + file.name + '](' + file.link +')'; })
+                             .join(' ') + ' ';
                 textbox.val(textbox.val() + links);
             },
             // Optional. A value of false (default) limits selection to a single file, while

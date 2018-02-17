@@ -23,7 +23,7 @@ exports.set_night_mode = function (bool) {
         },
         error: function (xhr) {
             if (overlays.settings_open()) {
-                ui_report.error(i18n.t("Error updating night mode setting."), xhr, 
+                ui_report.error(i18n.t("Error updating night mode setting."), xhr,
                     $('#display-settings-status').expectOne());
             }
         },
@@ -122,8 +122,7 @@ exports.set_up = function () {
             url: '/json/settings/display',
             data: data,
             success: function () {
-                ui_report.success(i18n.t("User list will appear on the __side__ hand side!" +
-                    "You will need to reload the window for your changes to take effect.", 
+                ui_report.success(i18n.t("User list will appear on the __side__ hand side! You will need to reload the window for your changes to take effect.",
                     context),$('#display-settings-status').expectOne());
             },
             error: function (xhr) {
@@ -153,7 +152,7 @@ exports.set_up = function () {
                                   $('#display-settings-status').expectOne());
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error updating time format setting"), 
+                ui_report.error(i18n.t("Error updating time format setting"),
                 xhr, $('#display-settings-status').expectOne());
             },
         });
@@ -191,7 +190,7 @@ exports.set_up = function () {
                 loading.make_indicator(spinner, {text: 'Changing emojiset.'});
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error changing emojiset."), 
+                ui_report.error(i18n.t("Error changing emojiset."),
                     xhr, $('#display-settings-status').expectOne());
             },
         });

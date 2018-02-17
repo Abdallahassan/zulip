@@ -48,7 +48,7 @@ function update_table_stream_color(table, stream_name, color) {
         var $label = $(label);
         if ($.trim($label.text()) === stream_name) {
             var messages = $label.closest(".recipient_row").children(".message_row");
-            messages.children(".messagebox").css("box-shadow", "inset 2px 0px 0px 0px " + 
+            messages.children(".messagebox").css("box-shadow", "inset 2px 0px 0px 0px " +
                 style + ", -1px 0px 0px 0px " + style);
             $label.css({background: style});
             $label.removeClass(exports.color_classes);
@@ -85,7 +85,7 @@ var subscriptions_table_colorpicker_options = {
 
 exports.set_colorpicker_color = function (colorpicker, color) {
     colorpicker.spectrum(_.extend(subscriptions_table_colorpicker_options,
-                         {color: color, 
+                         {color: color,
                             container: "#subscription_overlay .subscription_settings.show"}));
 };
 
@@ -97,9 +97,9 @@ exports.update_stream_color = function (sub, color, opts) {
     $(".stream-row[data-stream-id='" + id + "'] .icon").css('background-color', color);
     // The swatch in the color picker.
     exports.set_colorpicker_color($(
-        "#subscription_overlay .subscription_settings[data-stream-id='" + 
+        "#subscription_overlay .subscription_settings[data-stream-id='" +
             id + "'] .colorpicker"), color);
-    $("#subscription_overlay .subscription_settings[data-stream-id='" + id + 
+    $("#subscription_overlay .subscription_settings[data-stream-id='" + id +
         "'] .large-icon").css("color", color);
 
     if (opts.update_historical) {
