@@ -89,7 +89,9 @@ function handle_keydown(e) {
     var code = e.keyCode || e.which;
 
     if (code === 13 || (code === 9 && !e.shiftKey)) { // Enter key or tab key
-        if (e.target.id === "stream" || e.target.id === "subject" || e.target.id === "private_message_recipient") {
+        if (e.target.id === "stream" ||
+         e.target.id === "subject" ||
+         e.target.id === "private_message_recipient") {
             // For enter, prevent the form from submitting
             // For tab, prevent the focus from changing again
             e.preventDefault();
@@ -419,9 +421,11 @@ exports.content_typeahead_selected = function (item) {
         if (beginning.lastIndexOf(":") === 0 ||
             beginning.charAt(beginning.lastIndexOf(":") - 1) === " " ||
             beginning.charAt(beginning.lastIndexOf(":") - 1) === "\n") {
-            beginning = (beginning.substring(0, beginning.length - this.token.length - 1)+ ":" + item.emoji_name + ": ");
+            beginning = (beginning.substring(0, beginning.length - this.token.length - 1) +
+                ":" + item.emoji_name + ": ");
         } else {
-            beginning = (beginning.substring(0, beginning.length - this.token.length - 1) + " :" + item.emoji_name + ": ");
+            beginning = (beginning.substring(0, beginning.length - this.token.length - 1) +
+                " :" + item.emoji_name + ": ");
         }
     } else if (this.completing === 'mention') {
         beginning = beginning.substring(0, beginning.length - this.token.length - 1);
