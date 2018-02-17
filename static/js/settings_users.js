@@ -120,7 +120,7 @@ function populate_users(realm_people_data) {
     list_render($bots_table, bots, {
         name: "admin_bot_list",
         modifier: function (item) {
-            return templates.render("admin_user_list", 
+            return templates.render("admin_user_list",
                 { user: item, can_modify: page_params.is_admin });
         },
         filter: {
@@ -157,7 +157,7 @@ function populate_users(realm_people_data) {
                 activity_rendered = $("<span></span>").text(i18n.t("Unknown"));
             }
 
-            var $row = $(templates.render("admin_user_list", 
+            var $row = $(templates.render("admin_user_list",
                 {user: item, can_modify: page_params.is_admin}));
 
             $row.find(".last_active").append(activity_rendered);
@@ -180,7 +180,7 @@ function populate_users(realm_people_data) {
     list_render($deactivated_users_table, deactivated_users, {
         name: "deactivated_users_table_list",
         modifier: function (item) {
-            return templates.render("admin_user_list", 
+            return templates.render("admin_user_list",
                 { user: item, can_modify: page_params.is_admin });
         },
         filter: {
