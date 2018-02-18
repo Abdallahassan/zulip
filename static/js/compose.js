@@ -319,8 +319,8 @@ exports.send_message = function send_message(request) {
     }
 
     exports.transmit_message(request, success, error);
-    var msg = "Restarting get_events because it was not running during send";
-    server_events.assert_get_events_running(msg);
+    var msg2 = "Restarting get_events because it was not running during send";
+    server_events.assert_get_events_running(msg2);
 
     if (locally_echoed) {
         clear_compose_box();
@@ -365,9 +365,9 @@ function patch_request_for_scheduling(request) {
 
         $("#compose-textarea").attr('disabled', false);
         if (command_line.slice(command.length, command.length + 1) !== ' ') {
-            var msg = 'Invalid slash command. ';
-            msg = msg.concat('Check if you are missing a space after the command.');
-            compose_error(i18n.t(msg),
+            var msg3 = 'Invalid slash command. ';
+            msg3 = msg3.concat('Check if you are missing a space after the command.');
+            compose_error(i18n.t(msg3),
                 $('#compose-textarea'));
         } else if (deliver_at.trim() === '') {
             compose_error(i18n.t('Please specify time for your reminder.'),
@@ -675,8 +675,8 @@ exports.validate = function () {
     }
 
     if ($("#zephyr-mirror-error").is(":visible")) {
-        var msg = "You need to be running Zephyr mirroring in order to send messages!";
-        compose_error(i18n.t(msg));
+        var msg1 = "You need to be running Zephyr mirroring in order to send messages!";
+        compose_error(i18n.t(msg1));
         return false;
     }
 

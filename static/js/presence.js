@@ -81,9 +81,8 @@ function status_from_timestamp(baseline_time, info) {
                     }
                     break;
                 default:
-                    blueslip.error('Unexpected status',
-                                   {presence_object: device_presence, device: device}, 
-                                   undefined);
+                    var status_obj = {presence_object: device_presence, device: device};
+                    blueslip.error('Unexpected status', status_obj, undefined);
             }
         }
     });
