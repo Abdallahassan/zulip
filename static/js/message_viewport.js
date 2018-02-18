@@ -210,7 +210,9 @@ exports.scrollTop = function viewport_scrollTop(target_scrollTop) {
         // staying at 0 -- and afterwards if you call
         // window.scrollTop(x) again, it will still do nothing.  To
         // fix this, we need to first scroll to some other place.
-        blueslip.info("ScrollTop did nothing when scrolling to " + target_scrollTop + ", fixing...");
+        blueslip.info("ScrollTop did nothing when scrolling to "
+                      + target_scrollTop
+                      + ", fixing...");
         // First scroll to 1 in order to clear the stuck state
         exports.message_pane.scrollTop(1);
         // And then scroll where we intended to scroll to

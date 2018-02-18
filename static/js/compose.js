@@ -319,7 +319,8 @@ exports.send_message = function send_message(request) {
     }
 
     exports.transmit_message(request, success, error);
-    server_events.assert_get_events_running("Restarting get_events because it was not running during send");
+    var msg = "Restarting get_events because it was not running during send";
+    server_events.assert_get_events_running(msg);
 
     if (locally_echoed) {
         clear_compose_box();
@@ -364,10 +365,13 @@ function patch_request_for_scheduling(request) {
 
         $("#compose-textarea").attr('disabled', false);
         if (command_line.slice(command.length, command.length + 1) !== ' ') {
-            compose_error(i18n.t('Invalid slash command. Check if you are missing a space after the command.'),
+            var msg = 'Invalid slash command. ';
+            msg = msg.concat('Check if you are missing a space after the command.');
+            compose_error(i18n.t(msg),
                 $('#compose-textarea'));
         } else if (deliver_at.trim() === '') {
-            compose_error(i18n.t('Please specify time for your reminder.'), $('#compose-textarea'));
+            compose_error(i18n.t('Please specify time for your reminder.'),
+                          $('#compose-textarea'));
         } else {
             compose_error(i18n.t('Your reminder note is empty!'), $('#compose-textarea'));
         }
@@ -572,14 +576,20 @@ exports.validate_stream_message_address_info = function (stream_name) {
     switch (check_unsubscribed_stream_for_send(stream_name,
                                                page_params.narrow_stream !== undefined)) {
     case "does-not-exist":
-        response = i18n.t("<p>The stream <b>__stream_name__</b> does not exist.</p><p>Manage your subscriptions <a href='#streams/all'>on your Streams page</a>.</p>", context);
+        var msg = "<p>The stream <b>__stream_name__</b> does not exist.</p>";
+        msg = msg.concat("<p>Manage your subscriptions <a href='#streams/all'>");
+        msg = msg.concat("on your Streams page</a>.</p>");
+        response = i18n.t(msg, context);
         compose_error(response, $('#stream'));
         return false;
     case "error":
         compose_error(i18n.t("Error checking subscription"), $("#stream"));
         return false;
     case "not-subscribed":
-        response = i18n.t("<p>You're not subscribed to the stream <b>__stream_name__</b>.</p><p>Manage your subscriptions <a href='#streams/all'>on your Streams page</a>.</p>", context);
+        var msg = "<p>You're not subscribed to the stream <b>__stream_name__</b>.</p>";
+        msg = msg.concat("<p>Manage your subscriptions <a href='#streams/all'>");
+        msg = msg.concat("on your Streams page</a>.</p>");
+        response = i18n.t(msg, context);
         compose_error(response, $('#stream'));
         return false;
     }
@@ -625,7 +635,8 @@ function validate_stream_message() {
 // for now)
 function validate_private_message() {
     if (compose_state.recipient() === "") {
-        compose_error(i18n.t("Please specify at least one recipient"), $("#private_message_recipient"));
+        compose_error(i18n.t("Please specify at least one recipient"),
+                      $("#private_message_recipient"));
         return false;
     } else if (page_params.realm_is_zephyr_mirror_realm) {
         // For Zephyr mirroring realms, the frontend doesn't know which users exist
@@ -664,7 +675,8 @@ exports.validate = function () {
     }
 
     if ($("#zephyr-mirror-error").is(":visible")) {
-        compose_error(i18n.t("You need to be running Zephyr mirroring in order to send messages!"));
+        var msg = "You need to be running Zephyr mirroring in order to send messages!";
+        compose_error(i18n.t(msg));
         return false;
     }
 
@@ -960,7 +972,8 @@ exports.initialize = function () {
 
         var video_call_id = util.random_int(100000000000000, 999999999999999);
         var video_call_link = 'https://meet.jit.si/' +  video_call_id;
-        var video_call_link_text = '[' + _('Click to join video call') + '](' + video_call_link + ')';
+        var video_call_link_text = '[' + _('Click to join video call') +
+                                   '](' + video_call_link + ')';
         compose_ui.insert_syntax_and_focus(video_call_link_text);
     });
 
@@ -1022,8 +1035,9 @@ exports.initialize = function () {
             // Required. Called when a user selects an item in the Chooser.
             success: function (files) {
                 var textbox = $("#compose-textarea");
-                var links = _.map(files, function (file) { return '[' + file.name + '](' + file.link +')'; })
-                             .join(' ') + ' ';
+                var links = _.map(files, function (file) {
+                  return '[' + file.name + '](' + file.link +')';
+                }).join(' ') + ' ';
                 textbox.val(textbox.val() + links);
             },
             // Optional. A value of false (default) limits selection to a single file, while
