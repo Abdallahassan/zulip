@@ -576,20 +576,20 @@ exports.validate_stream_message_address_info = function (stream_name) {
     switch (check_unsubscribed_stream_for_send(stream_name,
                                                page_params.narrow_stream !== undefined)) {
     case "does-not-exist":
-        var msg = "<p>The stream <b>__stream_name__</b> does not exist.</p>";
-        msg = msg.concat("<p>Manage your subscriptions <a href='#streams/all'>");
-        msg = msg.concat("on your Streams page</a>.</p>");
-        response = i18n.t(msg, context);
+        var msg4 = "<p>The stream <b>__stream_name__</b> does not exist.</p>";
+        msg4 = msg4.concat("<p>Manage your subscriptions <a href='#streams/all'>");
+        msg4 = msg4.concat("on your Streams page</a>.</p>");
+        response = i18n.t(msg4, context);
         compose_error(response, $('#stream'));
         return false;
     case "error":
         compose_error(i18n.t("Error checking subscription"), $("#stream"));
         return false;
     case "not-subscribed":
-        var msg = "<p>You're not subscribed to the stream <b>__stream_name__</b>.</p>";
-        msg = msg.concat("<p>Manage your subscriptions <a href='#streams/all'>");
-        msg = msg.concat("on your Streams page</a>.</p>");
-        response = i18n.t(msg, context);
+        var msg5 = "<p>You're not subscribed to the stream <b>__stream_name__</b>.</p>";
+        msg5 = msg5.concat("<p>Manage your subscriptions <a href='#streams/all'>");
+        msg5 = msg5.concat("on your Streams page</a>.</p>");
+        response = i18n.t(msg5, context);
         compose_error(response, $('#stream'));
         return false;
     }
