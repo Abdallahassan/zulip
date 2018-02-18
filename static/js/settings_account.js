@@ -266,7 +266,8 @@ exports.set_up = function () {
                 window.location.href = "/login";
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Error deactivating account"), xhr, $('#account-settings-status').expectOne());
+                ui_report.error(
+                    i18n.t("Error deactivating account"), xhr, $('#account-settings-status').expectOne());
             },
         });
     });

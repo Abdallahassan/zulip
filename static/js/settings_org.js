@@ -53,7 +53,8 @@ exports.populate_realm_domains = function (realm_domains) {
     if (domains !== "None") {
         $("#id_realm_restricted_to_domain").attr("data-toggle", "none");
     }
-    $("#realm_restricted_to_domains_label").text(i18n.t("Restrict new users to the following email domains: __domains__", {domains: domains}));
+    $("#realm_restricted_to_domains_label").text(
+        i18n.t("Restrict new users to the following email domains: __domains__", {domains: domains}));
 
     var realm_domains_table_body = $("#realm_domains_table tbody").expectOne();
     realm_domains_table_body.find("tr").remove();
@@ -475,10 +476,14 @@ function _set_up() {
                                        {num_minutes : data_message_content_edit_limit_minutes}),
                                 message_editing_status);
                         } else {
-                            ui_report.success(i18n.t("Users can now edit the content and topics of all their past messages!"), message_editing_status);
+                            ui_report.success(
+                                i18n.t("Users can now edit the content and topics of all their past messages!"),
+                                message_editing_status);
                         }
                     } else {
-                        ui_report.success(i18n.t("Users can no longer edit their past messages!"), message_editing_status);
+                        ui_report.success(
+                            i18n.t("Users can no longer edit their past messages!"),
+                            message_editing_status);
                     }
                     // message_content_edit_limit_seconds could have been changed earlier
                     // in this function, so update the field just in case
@@ -554,7 +559,8 @@ function _set_up() {
 
         // take the existing object and apply the rest of the properties.
         var data = populate_data_for_request({
-            message_retention_days: new_message_retention_days !== "" ? JSON.stringify(parseInt(new_message_retention_days, 10)) : null,
+            message_retention_days: new_message_retention_days !== ""
+                ? JSON.stringify(parseInt(new_message_retention_days, 10)) : null,
         }, 'permissions');
 
         if (add_emoji_permission === "by_admins_only") {
@@ -584,7 +590,8 @@ function _set_up() {
 
                 if (response_data.create_stream_by_admins_only !== undefined ||
                     response_data.waiting_period_threshold !== undefined) {
-                    ui_report.success(i18n.t("Stream creation permission changed!"), create_stream_permission_status);
+                    ui_report.success(
+                        i18n.t("Stream creation permission changed!"), create_stream_permission_status);
                 }
 
                 process_response_data(response_data, 'permissions');
@@ -817,14 +824,17 @@ function _set_up() {
             success: function (response_data) {
                 if (response_data.signup_notifications_stream_id !== undefined) {
                     if (response_data.signup_notifications_stream_id < 0) {
-                        ui_report.success(i18n.t("Signup notifications stream disabled!"), signup_notifications_stream_status);
+                        ui_report.success(
+                            i18n.t("Signup notifications stream disabled!"), signup_notifications_stream_status);
                     } else {
-                        ui_report.success(i18n.t("Signup notifications stream changed!"), signup_notifications_stream_status);
+                        ui_report.success(
+                            i18n.t("Signup notifications stream changed!"), signup_notifications_stream_status);
                     }
                 }
             },
             error: function (xhr) {
-                ui_report.error(i18n.t("Failed to change signup notifications stream!"), xhr, signup_notifications_stream_status);
+                ui_report.error(
+                    i18n.t("Failed to change signup notifications stream!"), xhr, signup_notifications_stream_status);
             },
         });
     }
