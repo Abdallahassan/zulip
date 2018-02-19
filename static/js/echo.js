@@ -286,7 +286,9 @@ $(function () {
             // otherwise send would not have failed
             var message = waiting_for_ack[message_id];
             if (message === undefined) {
-                blueslip.warn("Got resend or retry on failure request but did not find message in ack list " + message_id);
+                var warning = "Got resend or retry on failure request ";
+                warning = warning.concat("but did not find message in ack list ");
+                blueslip.warn(warning + message_id);
                 return;
             }
             callback(message, row);
